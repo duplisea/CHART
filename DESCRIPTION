@@ -1,0 +1,16 @@
+Package: CHART
+Type: Package
+Title: CHART: a fish habitat compensation decision-support tool
+Version: 1.0
+Authors@R: c(
+    person(
+      "Daniel", "Duplisea",
+      email = "daniel.duplisea@dfo-mpo.gc.ca",
+      role = c("aut", "cre")
+    )
+  )
+Description: A simulation tool has been developed to support decision-making on fish habitat compensation projects in Canada consistent with the Fisheries Act. The tool considers the fish habitat support capacity of the HADD habitat and the potential compensation habitat along several axes. Those capacities are scored on a Likert Scale from 0 to 5 along each axis by an analyst using evidence from the scientific literature, previous compensation projects and expert knowledge. The analyst also scores the relative importance of each axis for its contribution the decision making process on compensation. Simulations are performed accounting for the uncertainty in the scores provided by the analysts and a distribution of compensation ratios results to inform the scale of the compensation project(s) required to offset the HADD. The distribution of outcomes allows the work to be interpreted within a risk framework consistent with policy following from the Fisheries Act. In addition to considering direct compensation projects, this tool can be used to derive compensation ratios between any number of habitat pairs as well as determine the compensation value of previously banked habitats at the time of 'withdrawal' to offset a HADD.
+License: Crown Copyright
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2

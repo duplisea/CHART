@@ -1,8 +1,8 @@
 ---
 title: "CHART: a fish habitat compensation decision-support tool - CHART: un outil d'aide à la décision pour la compensation des habitats des poissons"
 author: "Daniel E. Duplisea"
-date: "Dec 2024"
-output: md_document
+date: "started December 2024"
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}

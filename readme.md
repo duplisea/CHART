@@ -338,7 +338,7 @@ be the same for both habitats.*
 <col style="width: 22%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;"><strong>Ecosystem service</strong></th>
 <th style="text-align: center;"><strong>Importance score
 range</strong></th>
@@ -347,79 +347,79 @@ range</strong></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><em>Zostera (HADD)</em></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">   Biodiversity</td>
 <td style="text-align: center;">3-5</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.2</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">   Feeding</td>
 <td style="text-align: center;">4-5</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.3</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">   Migration</td>
 <td style="text-align: center;">1-2</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.1</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">   Nursery</td>
 <td style="text-align: center;">3-4</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.3</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">   Coastal Stabilisation</td>
 <td style="text-align: center;">3-5</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.1</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><em>Laminaria (Offset)</em></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">   Biodiversity</td>
 <td style="text-align: center;">3-5</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.2</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">   Feeding</td>
 <td style="text-align: center;">2-3</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.3</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">   Migration</td>
 <td style="text-align: center;">2-4</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.1</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">   Nursery</td>
 <td style="text-align: center;">2-3</td>
 <td style="text-align: center;">publication</td>
 <td style="text-align: center;">0.3</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">   Coastal Stabilisation</td>
 <td style="text-align: center;">1-2</td>
 <td style="text-align: center;">publication</td>

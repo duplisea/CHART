@@ -1,0 +1,10 @@
+name: CHART
+title: CHART - Compensation Calculator
+username: duplisea
+account: duplisea
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14671870
+bundleId: 10219931
+url: https://duplisea.shinyapps.io/CHART/
+version: 1

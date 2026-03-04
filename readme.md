@@ -264,14 +264,11 @@ considered in such a process. In this case, we chose to consider each of
 these habitats for five ESFs, which can generally be thought of as
 contributions to ecosystem services:
 
-1.  As Biodiversity support in the system generally (Orth et al. 2006;
-    Steneck et al. 2002).
+1.  As Biodiversity support in the system generally
 2.  As a Feeding area for fish (fish as defined by the Fisheries Act)
-    (Government of Canada 2019).
-3.  As a Migration area for fish in transit (Orth et al. 2006).
-4.  As a Nursery area for fish (Heck et al. 2003).
-5.  As a Stabilisation habitat that prevents coastal erosion (Watson &
-    Estes 2011).
+3.  As a Migration area for fish in transit
+4.  As a Nursery area for fish
+5.  As a Stabilisation habitat that prevents coastal erosion
 
 For each of these ESFs, the analyst needs to weight their importance in
 the decision support process. For example, Feeding and Nursery support
@@ -303,11 +300,10 @@ The analyst must provide a contribution score range for each ESF for
 each habitat type, that is, for both the HADD habitat and the
 compensation habitat. The analyst may not know exactly how important an
 eelgrass habitat is for its role as fish nursery habitat, but they know
-from the literature (Heck et al., 2003) that this is an important
-function of eelgrass habitats. Consequently, they might rank it from 3
-to 4 (with 5 being the maximum), while kelp reefs may be less important
-for this function in eastern Canada but still significant, resulting in
-a rank of 2 to 3.
+from the literature that this is an important function of eelgrass
+habitats. Consequently, they might rank it from 3 to 4 (with 5 being the
+maximum), while kelp reefs may be less important for this function in
+eastern Canada but still significant, resulting in a rank of 2 to 3.
 
 Once the ESFs are chosen, the weights assigned to each ESF in the
 decision-making process, and score ranges developed for both the HADD
@@ -500,11 +496,11 @@ quantile other than 50% (the median compensation) if one were required
 to offset a HADD with a great probability of fully offsetting the HADD.
 that is, one might choose a compensation larger than 50% (equal chance
 of over- or under-offsetting) to assure that the intended offset is
-achieved (Curran et al. 2014). The process is directly a risk (based on
-uncertainty) process where one could choose the 97.5 percentile of the
-compensation area (largest extent of error bar in panel 2 of Fig. 1 =
-8030 m²) to statistically assure that a HADD is fully offset by the
-compensation project.
+achieved. The process is directly a risk (based on uncertainty) process
+where one could choose the 97.5 percentile of the compensation area
+(largest extent of error bar in panel 2 of Fig. 1 = 8030 m²) to
+statistically assure that a HADD is fully offset by the compensation
+project.
 
 ## Real world application
 
@@ -576,186 +572,6 @@ about it. In fact, to account for the uncertainty, a decision maker
 should probably use a larger percentile than 50% since 50% is just equal
 probability of being above or below a no net loss compensation, i.e. it
 has only a 50% chance of fully compensating for the HADD.
-
-## References (not all are cited presently)
-
-Auster PJ, Shackell NL. Marine Protected Areas for the Temperate and
-Boreal Northwest Atlantic: Sustaining Living Marine Resources at
-Genetic, Population-Community, Ecosystem, and Landscape Levels.
-Northeastern Naturalist. 2000;7:419-35. Available from:
-<https://bioone.org/journals/northeastern-naturalist/volume-7/issue-4/1092-6194_2000_007_0419_MPAFTT_2.0.CO_2>
-
-Bradford MJ, Macdonald JS, Levings CD. Monitoring Fish Habitat
-Compensation in the Pacific Region: Lessons from the Past 30 Years.
-Canadian Technical Report of Fisheries and Aquatic Sciences.
-2014;3089:vi + 39 p. Available from:
-<https://publications.gc.ca/collections/collection_2017/mpo-dfo/Fs70-5-2017-033-eng.pdf>
-
-Chavarria Resendez M. Habitat Banking: Valuation Aspects and Development
-of Environmental Compensation Tools. Agricultural and Applied Economics
-Association Annual Meeting. 2013:1-22. Available from:
-<https://www.aieaa.org/sites/default/files/Chavarria%20resendez.pdf>
-
-Clarke KD. Evaluating Habitat Compensation in Insular Newfoundland
-Rivers: What Have We Learned? Canadian Manuscript Report of Fisheries
-and Aquatic Sciences. 2016;3081:vi + 28 p. Available from:
-<https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/365983.pdf>
-
-Curran M, Hellweg S, Beck J. Is there any empirical support for
-biodiversity offset policy? Ecological Applications. 2014;24(4):617-32.
-Available from:
-<https://naturalistesenlutte.files.wordpress.com/2015/02/curran_et_al-_2014.pdf>
-
-Desroy N, Retiere C. Nursery Function of Coastal Temperate Benthic
-Habitats: New Insight into Bivalve Recruitment. Marine Ecology Progress
-Series. 2001;212:69-85. Available from:
-<https://borea.mnhn.fr/en/nursery-function-coastal-temperate-benthic-habitats-new-insight-bivalve-recruitment-perspective>
-
-Fisheries and Oceans Canada. Assessing the Effectiveness of Fish Habitat
-Compensation Activities in Canada: Monitoring Design and Metrics. DFO
-Canadian Science Advisory Secretariat Science Advisory Report.
-2012;2012/060. Available from:
-<https://www.dfo-mpo.gc.ca/csas-sccs/Publications/SAR-AS/2012/2012_060-eng.html>
-
-Fisheries and Oceans Canada. Feasibility of Third-party Fish Habitat
-Banking in Canada. Canadian Technical Report of Fisheries and Aquatic
-Sciences. 2017;3047:viii + 37 p. Available from:
-<https://www.ourcommons.ca/Content/Committee/421/FOPO/Brief/BR10593101/br-external/CanadianWildlifeFederation-e.pdf>
-
-Fisheries and Oceans Canada. New Guiding Principles for Modernizing Fish
-Habitat Offsetting and Banking. Fisheries and Oceans Canada Report.
-2023;25 p. Available from:
-<https://nwac.ca/assets-documents/New-Guiding-principles-for-habitat-offsetting-and-banking-Final-Report-Nov-21-2023.pdf>
-
-Fisheries and Oceans Canada. Science Advice to the Fish and Fish Habitat
-Protection Program on Offsetting. Canadian Science Advisory Secretariat
-Science Advisory Report. 2022;2022/052:iv + 32 p. Available from:
-<https://publications.gc.ca/collections/collection_2022/mpo-dfo/fs70-6/Fs70-6-2022-052-eng.pdf>
-
-Fitzsimons JD. Assessment of Measures to Assess Compensation and
-Mitigation as Related to the Creation, Rehabilitation, or Restoration of
-Spawning Habitat for Fluvial or Lacustrine Spawning Salmonines. Canadian
-Science Advisory Secretariat Research Document. 2013;2013/110:iv + 33
-p. Available from:
-<https://publications.gc.ca/collections/collection_2014/mpo-dfo/Fs70-5-2013-110-eng.pdf>
-
-Government of Canada. Fisheries Act. 2019. Available from:
-<https://laws-lois.justice.gc.ca/eng/acts/F-14/>
-
-Harper DJ, Quigley JT. No Net Loss of Fish Habitat: A Review and
-Analysis of Habitat Compensation in Canada. Environmental Management.
-2005;36(3):343-55. Available from:
-<https://www.grstreamkeepers.com/wp-content/uploads/2021/12/Nonetloss.pdf>
-
-Heck KL, Hays G, Orth RJ. Critical Evaluation of the Nursery Role
-Hypothesis for Seagrass Meadows. Marine Ecology Progress Series.
-2003;253:123-36. Available from: <https://example.com>
-
-Hunt K, Patrick P, Connell M. Fish Habitat Banking in Canada:
-Opportunities and Challenges. Canadian Technical Report of Fisheries and
-Aquatic Sciences. 2011;2975:vi + 39 p. Available from:
-<https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/347440.pdf>
-
-Kovacs KM, Lydersen C, Overland JE, Moore SE. Impacts of Changing
-Sea-Ice Conditions on Arctic Marine Mammals. Marine Biodiversity.
-2011;41:181-94. Available from:
-<https://www.frontiersin.org/journals/environmental-science/articles/10.3389/fenvs.2024.1434549/full>
-
-Moilanen A, van Teeffelen AJA, Ben-Haim Y, Ferrier S. How Much
-Compensation is Enough? A Framework for Incorporating Uncertainty and
-Time Discounting When Calculating Offset Ratios for Impacted Habitat.
-Restoration Ecology. 2009;17(4):470-8. Available from:
-<https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1526-100X.2008.00382.x>
-
-Orth RJ, Heck KL, van Montfrans J. Seagrass Ecosystems: Their Ecology
-and Importance to Fishes in the Marine Environment. BioScience.
-2006;56(12):987-96.
-
-Steneck RS, Graham MH, Bourque BJ, Corbett D, Erlandson JM, Estes JA,
-Tegner MJ. Kelp Forest Ecosystems: Biodiversity, Stability, Resilience,
-and Future. Environmental Conservation. 2002;29(4):436-59.
-
-Tucker G, Dickie I, McCarthy D, Rayment M, ten Brink P, Underwood E, et
-al. Habitat Banking in the EU: A Review of National and EU-Level Policy
-Recommendations. Forest Trends & Business and Biodiversity Offsets
-Programme (BBOP). 2013:1-38. Available from:
-<https://www.forest-trends.org/wp-content/uploads/bbop/final-habitat-banking-bbop-webinar-06032013-pdf.pdf>
-
-Watson J, Estes JA. Stability, Resilience, and Phase Shifts in Kelp
-Forest Ecosystems. Philosophical Transactions of the Royal Society B.
-2011;366(1586):86-95.
-
-Williams GL. Habitat Compensation Banking for Finfish Aquaculture.
-Canadian Technical Report of Fisheries and Aquatic Sciences.
-2005;2570:iv + 28 p. Available from:
-<https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/331814.pdf>
-
-Wisconsin Department of Natural Resources. Guidelines for Wetland
-Compensatory Mitigation in Wisconsin. Wisconsin Department of Natural
-Resources Publication. 2013:1-36. Available from:
-<https://dnr.wisconsin.gov/sites/default/files/topic/Wetlands/WetlandCompensatoryMitigationGuidelines.pdf>
-
-<!--
-Publishing a paper on a fish habitat compensation tool involves targeting journals that focus on fisheries management, aquatic conservation, ecological modeling, and environmental decision-making. Here’s a list of potential scientific journals that would likely consider a paper describing your tool, considering its focus on simulation, decision support, and fisheries policy:
-Fisheries and Aquatic Sciences Journals
-
-    Canadian Journal of Fisheries and Aquatic Sciences (CJFAS)
-        Scope: Fisheries science, aquatic habitats, and policy-related studies.
-        Why it fits: Strong relevance to Canadian fisheries policy, habitat compensation, and the Fisheries Act.
-        Impact: High visibility in Canadian and international aquatic research.
-
-    Fisheries Management and Ecology
-        Scope: Fisheries management tools, modeling, and ecological assessments.
-        Why it fits: Focus on practical tools for management and habitat restoration.
-
-    ICES Journal of Marine Science
-        Scope: Fisheries and marine ecosystems, with emphasis on decision-support tools and risk assessments.
-        Why it fits: They publish papers on fisheries management models and decision-support systems.
-
-    Aquatic Conservation: Marine and Freshwater Ecosystems
-        Scope: Conservation tools and habitat protection for freshwater and marine ecosystems.
-        Why it fits: Ideal for habitat compensation frameworks tied to policy and conservation.
-
-Ecological and Environmental Journals
-
-    Ecological Modelling
-        Scope: Computational models for ecosystem and environmental processes.
-        Why it fits: Your simulation tool fits well as a model-driven approach to decision-making for habitat compensation.
-
-    Journal of Environmental Management
-        Scope: Applied environmental science, including habitat management and compensation strategies.
-        Why it fits: Focuses on policy applications and management tools, especially for environmental compensation.
-
-    Restoration Ecology
-        Scope: Restoration of ecosystems, compensation projects, and ecological mitigation.
-        Why it fits: Your tool addresses compensation for habitat loss, which aligns with restoration and mitigation goals.
-
-Policy and Decision-Making Journals
-
-    Environmental Modelling & Software
-        Scope: Decision-support tools, simulation models, and policy applications in environmental science.
-        Why it fits: They publish papers describing tools and frameworks that guide decision-making.
-
-    Marine Policy
-        Scope: Marine resource management, governance, and decision-making frameworks.
-        Why it fits: Your tool’s alignment with the Fisheries Act and compensation policy makes this a potential fit.
-
-    Ecological Applications (Journal of the Ecological Society of America)
-
-    Scope: Applied ecological studies with a focus on policy, conservation, and ecosystem services.
-    Why it fits: Strong focus on habitat compensation frameworks, ecosystem service valuation, and policy alignment.
-
-Additional Recommendations:
-
-    If the focus is more quantitative or computational, journals like "Methods in Ecology and Evolution" may also be interested.
-    You can also consider regional journals that focus on North American or Canadian aquatic ecosystems, such as Northeastern Naturalist for a more localized audience.
-
-Next Steps:
-
-    Tailor your paper to the aims and scope of your chosen journal.
-    Highlight your tool’s novelty, reproducibility, and relevance to policy (especially the Fisheries Act) and management decisions.
-    Use case studies or validation examples to strengthen the practical utility of the tool.
--->
 
 [1] weights for decision making are not necessarily importance weights
 for ecological function though they should be roughly similar as

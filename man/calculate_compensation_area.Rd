@@ -2,69 +2,146 @@
 % Please edit documentation in R/chart.functions.r
 \name{calculate_compensation_area}
 \alias{calculate_compensation_area}
-\title{Calculate Compensation Area}
+\title{Calculate Compensation Area via Monte Carlo Simulation}
 \usage{
 calculate_compensation_area(
   destruction_area,
   factor_ranges_destroyed,
   factor_ranges_compensated,
   weights,
-  num_simulations = 5000,
+  temporal_comp_multiplier,
+  baseline_function_pct = 0,
+  num_simulations = 500,
   quantiles = c(0.025, 0.975),
-  habitat_names = c("Destroyed Habitat", "Compensation Habitat"),
-  factor_names = c("factor1", "factor2", "factor3", "factor4", "factor5")
+  habitat_names_en = c("Destroyed Habitat", "Compensation Habitat"),
+  habitat_names_fr = c("Habitat détruit", "Habitat de compensation"),
+  factor_names_en = c("factor1", "factor2", "factor3", "factor4", "factor5"),
+  factor_names_fr = c("facteur1", "facteur2", "facteur3", "facteur4", "facteur5"),
+  hadd_type = "destruction",
+  impact_duration_years = 1,
+  recovery_time_years = 1,
+  deterioration_pct = 50,
+  T_max = 50
 )
 }
 \arguments{
-\item{destruction_area}{A positive numeric value representing the area (in appropriate units) of habitat destruction.}
+\item{destruction_area}{Positive numeric. Area (m²) affected by the HADD.}
 
-\item{factor_ranges_destroyed}{A list of length 5, where each element is a numeric vector of length 2 specifying the minimum and maximum possible values of each factor for the destroyed habitat.}
+\item{factor_ranges_destroyed}{List of 5 numeric vectors of length 2
+(\code{c(min, max)}) for each factor score
+in the destroyed habitat.}
 
-\item{factor_ranges_compensated}{A list of length 5, where each element is a numeric vector of length 2 specifying the minimum and maximum possible values of each factor for the compensated habitat.}
+\item{factor_ranges_compensated}{List of 5 numeric vectors of length 2 for
+each factor score in the compensation habitat.}
 
-\item{weights}{A numeric vector of length 5 specifying the relative importance of each ecological factor. The weights will be normalized to sum to 1.}
+\item{weights}{Numeric vector of length 5. Relative
+importance of each factor (normalised
+internally to sum to 1). If all weights are
+zero, equal weights (0.2 each) are used.}
 
-\item{num_simulations}{An integer specifying the number of Monte Carlo simulations to run. Default is 5000.}
+\item{temporal_comp_multiplier}{Numeric. TCM from
+\code{\link{calculate_tcm_details}}.}
 
-\item{quantiles}{A numeric vector specifying the quantiles to use for the confidence interval of the adjusted compensation area. Default is c(0.025, 0.975).}
+\item{baseline_function_pct}{Numeric 0–<100. Existing ecological function
+(%) at the compensation site before
+improvement. Adjusts the required area by
+\eqn{1 / (1 - baseline\%/100)}. Default 0.}
 
-\item{habitat_names}{A character vector of length 2 specifying the names of the destroyed and compensated habitats, respectively. Default is c("Destroyed Habitat", "Compensation Habitat").}
+\item{num_simulations}{Integer. Number of Monte Carlo draws
+(default 500).}
 
-\item{factor_names}{A character vector of length 5 specifying the names of the ecological factors being evaluated. Default is c("factor1", "factor2", "factor3", "factor4", "factor5").}
+\item{quantiles}{Numeric vector of length 2.
+Confidence-interval quantiles (default
+\code{c(0.025, 0.975)}).}
+
+\item{habitat_names_en}{Character vector of length 2. English names
+for \code{c(destroyed, compensation)}
+habitats.}
+
+\item{habitat_names_fr}{Character vector of length 2. French names.}
+
+\item{factor_names_en}{Character vector of length 5. English factor
+names (default generic labels).}
+
+\item{factor_names_fr}{Character vector of length 5. French factor
+names.}
+
+\item{hadd_type}{Character. One of \code{"destruction"},
+\code{"deterioration"}, or
+\code{"perturbation"} (default
+\code{"destruction"}).}
+
+\item{impact_duration_years}{Numeric. For \code{hadd_type =
+"perturbation"}: years the habitat is fully
+blocked (default 1).}
+
+\item{recovery_time_years}{Numeric. For \code{hadd_type =
+"perturbation"}: years to return to baseline
+after impact (default 1).}
+
+\item{deterioration_pct}{Numeric 1–99. For \code{hadd_type =
+"deterioration"}: percentage of habitat
+function permanently lost (default 50).}
+
+\item{T_max}{Integer. Time horizon in years, used in the
+perturbation service-years calculation
+(default 50).}
 }
 \value{
-A list containing the following elements:
-\item{destruction_area}{The input destruction area.}
-\item{mean_adjusted_area}{The mean adjusted compensation area based on the simulations.}
-\item{median_adjusted_area}{The median adjusted compensation area based on the simulations.}
-\item{sd_adjusted_area}{The standard deviation of the adjusted compensation areas.}
-\item{confidence_interval}{The confidence interval for the adjusted compensation area based on the specified quantiles.}
-\item{simulated_areas}{A numeric vector of all simulated compensation areas.}
-\item{summary_stats}{A summary of the distribution of simulated compensation areas.}
-\item{habitat_names}{The names of the destroyed and compensated habitats.}
-\item{factor_names}{The names of the ecological factors.}
-\item{factor_ranges_destroyed}{The ranges of factor values for the destroyed habitat.}
-\item{factor_ranges_compensated}{The ranges of factor values for the compensated habitat.}
-\item{weights}{The normalized weights for each ecological factor.}
+A named list containing:
+\item{destruction_area}{Input destruction area.}
+\item{mean_adjusted_area}{Mean simulated compensation area.}
+\item{median_adjusted_area}{Median simulated compensation area.}
+\item{confidence_interval}{Named numeric vector with the CI bounds.}
+\item{simulated_areas}{All finite simulated compensation areas.}
+\item{habitat_names_en, habitat_names_fr}{Habitat name vectors.}
+\item{factor_names_en, factor_names_fr}{Factor name vectors.}
+\item{weights}{Raw input weights.}
+\item{weights_standardized}{Weights normalised to sum to 1.}
+\item{factor_ranges_destroyed, factor_ranges_compensated}{Named input
+  ranges.}
+\item{temporal_comp_multiplier}{Input TCM value.}
+\item{baseline_function_pct}{Input baseline percentage.}
+\item{baseline_adjustment}{Computed baseline adjustment factor.}
+\item{hadd_type}{HADD type string.}
+\item{impact_duration_years, recovery_time_years}{Perturbation parameters.}
+\item{deterioration_pct}{Deterioration parameter.}
 }
 \description{
-This function performs a Monte Carlo simulation to estimate the required compensation area for habitat destruction.
-It accounts for multiple ecological factors by simulating scores for the destroyed and compensated habitat areas along specified ranges.
+Estimates the required compensation area for a fish-habitat HADD (Harmful
+Alteration, Disruption, or Destruction) using a Monte Carlo simulation over
+five ecosystem-service factors. Supports three HADD types: permanent
+destruction, partial deterioration, and temporary perturbation.
 }
 \details{
-The function simulates habitat destruction and compensation scores across multiple ecological factors and calculates an adjusted compensation area for each simulation. The compensation area is scaled based on the ratio of weighted ecological scores for destroyed and compensated habitats. The function removes any infinite or non-finite simulation results to ensure accurate summary statistics.
+\strong{HADD types and formulae:}
+\describe{
+  \item{destruction}{Permanent, complete loss.
+    \eqn{A_{comp} = A_{HADD} \times (S_{dest}/S_{comp}) \times TCM
+    \times B_{adj}}}
+  \item{deterioration}{Permanent, partial loss. Only the lost fraction is
+    compensated:
+    \eqn{A_{comp} = A_{HADD} \times f_{det} \times (S_{dest}/S_{comp})
+    \times TCM \times B_{adj}}}
+  \item{perturbation}{Temporary loss, balanced in service-years.
+    \eqn{gain\_years = T_{max} / TCM};
+    \eqn{A_{comp} = (A_{HADD} \times S_{dest} \times (t_{impact} +
+    t_{recovery})) / (S_{comp} \times gain\_years) \times B_{adj}}.
+    This formulation is dimensionally consistent with the other HADD types
+    and avoids near-zero denominators.}
+}
 }
 \examples{
-destruction_area <- 1000
-factor_ranges_destroyed <- list(c(3, 5), c(2, 4), c(1, 3), c(2, 5), c(4, 5))
-factor_ranges_compensated <- list(c(1, 2), c(2, 3), c(3, 4), c(1, 3), c(2, 4))
-weights <- c(0.2, 0.3, 0.1, 0.2, 0.2)
+tcm <- calculate_tcm_details(2, 5)$temporal_comp_multiplier
 calculate_compensation_area(
-  destruction_area,
-  factor_ranges_destroyed,
-  factor_ranges_compensated,
-  weights,
-  num_simulations = 1000
+  destruction_area          = 1000,
+  factor_ranges_destroyed   = list(c(3,5), c(2,4), c(1,3), c(2,5), c(4,5)),
+  factor_ranges_compensated = list(c(1,2), c(2,3), c(3,4), c(1,3), c(2,4)),
+  weights                   = c(0.2, 0.3, 0.1, 0.2, 0.2),
+  temporal_comp_multiplier  = tcm,
+  num_simulations           = 1000,
+  habitat_names_en          = c("Zostera", "Laminaria"),
+  habitat_names_fr          = c("Zostère", "Laminaires")
 )
 
 }

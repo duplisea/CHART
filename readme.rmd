@@ -1,8 +1,8 @@
 ---
 title: "CHART: a fish habitat compensation decision-support tool - CHART: un outil d'aide à la décision pour la compensation des habitats des poissons"
 author: "Daniel E. Duplisea"
-date: "started December 2024"
-output: md_document
+date: "December 2024 - April 2026"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -12,214 +12,435 @@ library(patchwork)
 library(CHART)
 ```
 
-## Summary / Sommaire
-*A simulation tool has been developed to support decision-making on fish habitat compensation projects in Canada consistent with the Fisheries Act. The tool considers the fish habitat support capacity of the HADD habitat and the potential compensation habitat along several axes. Those capacities are scored on a Likert Scale from 0 to 5 along each axis by an analyst using evidence from the scientific literature, previous compensation projects and expert knowledge. The analyst also scores the relative importance of each axis for its contribution the decision making process on compensation. Simulations are performed accounting for the uncertainty in the scores provided by the analysts and a distribution of compensation ratios results to inform the scale of the compensation project(s) required to offset the HADD. The distribution of outcomes allows the work to be interpreted within a risk framework consistent with policy following from the Fisheries Act. In addition to considering direct compensation projects, this tool can be used to derive compensation ratios between any number of habitat pairs as well as determine the compensation value of previously banked habitats at the time of 'withdrawal' to offset a HADD.*
+---
+
+# Quick start
+
+Try the bilingual shiny app
+
+
+# Summary / Sommaire
+
+*A simulation tool has been developed to support decision-making on fish habitat compensation projects in Canada consistent with the Fisheries Act. The tool considers the fish habitat support capacity of the HADD habitat and the potential compensation habitat along several axes. Those capacities are scored on a Likert Scale from 0 to 5 along each axis by an analyst using evidence from the scientific literature, previous compensation projects and expert knowledge. The analyst also scores the relative importance of each axis for its contribution to the decision making process on compensation. The tool explicitly recognises three types of HADD — permanent destruction, permanent partial deterioration, and temporary perturbation — each with its own compensation formula. Simulations are performed accounting for the uncertainty in the scores provided by the analysts and a distribution of compensation areas results to inform the scale of the compensation project(s) required to offset the HADD. The distribution of outcomes allows the work to be interpreted within a risk framework consistent with policy following from the Fisheries Act. In addition to considering direct compensation projects, this tool can be used to derive compensation ratios between any number of habitat pairs as well as determine the compensation value of previously banked habitats at the time of 'withdrawal' to offset a HADD.*
 
 ---
 
-*Un outil de simulation a été développé pour soutenir la prise de décision dans les projets de compensation d'habitats pour les poissons au Canada, conformément à la Loi sur les pêches. L'outil prend en compte la capacité de soutien de l'habitat HADD et de l'habitat de compensation potentiel selon plusieurs axes. Ces capacités sont évaluées sur une échelle de Likert de 0 à 5 pour chaque axe par un analyste, en s'appuyant sur des données issues de la littérature scientifique, des projets de compensation précédents et des connaissances expertes. L'analyste attribue également un score à l'importance relative de chaque axe en fonction de sa contribution au processus décisionnel en matière de compensation. Des simulations sont réalisées en tenant compte de l'incertitude des scores fournis par les analystes, et une distribution des ratios de compensation en résulte pour informer l'ampleur des projets de compensation nécessaires afin de compenser le HADD. La distribution des résultats permet d’interpréter le travail dans un cadre de gestion des risques conforme à la politique découlant de la Loi sur les pêches. En plus d’évaluer les projets de compensation directs, cet outil peut être utilisé pour dériver des ratios de compensation entre plusieurs paires d'habitats et pour déterminer la valeur de compensation d'habitats préalablement « bancarisés » lors de leur « retrait » afin de compenser un HADD.*
+*Un outil de simulation a été développé pour soutenir la prise de décision dans les projets de compensation d'habitats pour les poissons au Canada, conformément à la Loi sur les pêches. L'outil prend en compte la capacité de soutien de l'habitat APDN et de l'habitat de compensation potentiel selon plusieurs axes. Ces capacités sont évaluées sur une échelle de Likert de 0 à 5 pour chaque axe par un analyste, en s'appuyant sur des données issues de la littérature scientifique, des projets de compensation précédents et des connaissances expertes. L'analyste attribue également un score à l'importance relative de chaque axe en fonction de sa contribution au processus décisionnel en matière de compensation. L'outil reconnaît explicitement trois types d'APDN — destruction permanente complète, détérioration permanente partielle et perturbation temporaire — chacun avec sa propre formule de compensation. Des simulations sont réalisées en tenant compte de l'incertitude des scores fournis par les analystes, et une distribution des surfaces de compensation en résulte pour informer l'ampleur des projets de compensation nécessaires afin de compenser l'APDN. La distribution des résultats permet d'interpréter le travail dans un cadre de gestion des risques conforme à la politique découlant de la Loi sur les pêches. En plus d'évaluer les projets de compensation directs, cet outil peut être utilisé pour dériver des ratios de compensation entre plusieurs paires d'habitats et pour déterminer la valeur de compensation d'habitats préalablement « bancarisés » lors de leur « retrait » afin de compenser une APDN.*
 
+---
 
-## Acronym and explanation
+# Acronym and explanation
 
-### English
+## English
+
 C.H.A.R.T. – Compensation Habitat Assessment and Ratio Tool
 
-    Compensation: the primary focus of the tool.
-    Habitat: central to the Fisheries Act mandate.
-    Assessment: structured scoring approach.
-    Ratio: derived compensation ratios between habitat pairs.
-    Tool: decision-support simulation framework.
+- **Compensation:** the primary focus of the tool.
+- **Habitat:** central to the Fisheries Act mandate.
+- **Assessment:** structured scoring approach.
+- **Ratio:** derived compensation ratios between habitat pairs.
+- **Tool:** decision-support simulation framework.
 
-### Français   
+## Français
+
 C.H.A.R.T. – Compensation, Habitat, Analyse, Ratios, et Trame
 
-    Compensation : l'objectif principal de l'outil.
-    Habitat : central au mandat de la Loi sur les pêches.
-    Analyse : approche structurée de notation des critères.
-    Ratios : ratios de compensation dérivés entre les habitats comparés.
-    Trame : cadre de simulation et de soutien à la prise de décision.
+- **Compensation :** l'objectif principal de l'outil.
+- **Habitat :** central au mandat de la Loi sur les pêches.
+- **Analyse :** approche structurée de notation des critères.
+- **Ratios :** ratios de compensation dérivés entre les habitats comparés.
+- **Trame :** cadre de simulation et de soutien à la prise de décision.
 
+---
 
-## Introduction
+# Introduction
 
-Under the Fisheries Act, any work undertaking or activity (WUA - see definition below) resulting in a harmful alteration, disruption or destruction of fish habitat (HADD see definition below) above a threshold level requires compensation/offset. The ecosystem service factor (ESF) considered in the compensation are partially outlined in the Fisheries Act but not all potential ESFs. The method outlined here is an example of how various ESFs could be integrated in a scoring-based approach to determine the scale of compensation required given the characteristics of the HADD owing to a WUA and the proposed compensation project to offset that HADD. Thus, this decision support tool was developed to make that process more transparent and to include uncertainty in knowledge of the biological processes.
+Under the Fisheries Act, any work, undertaking or activity (WUA — see definition below) resulting in a harmful alteration, disruption or destruction of fish habitat (HADD — see definition below) above a threshold level requires compensation/offset. The ecosystem service factor (ESF) considered in the compensation are partially outlined in the Fisheries Act but not all potential ESFs are enumerated. The method outlined here is an example of how various ESFs could be integrated in a scoring-based approach to determine the scale of compensation required given the characteristics of the HADD owing to a WUA and the proposed compensation project to offset that HADD.
 
-**Disclaimer**  
-This is just a proof of concept and not based on data, a thorough review of the literature or  knowledge from multiple experts. It is designed to show how a decision-making process could include a scoring-based tool as support to inform the scale of the compensation project required to offset a HADD. This should not be used as is and needs proper checking and parameterisation before real-world usage.
+This decision support tool was developed to make that process more transparent, to include uncertainty in knowledge of the biological processes, and to explicitly accommodate three distinct types of HADD impact — permanent destruction, permanent deterioration, and temporary perturbation — each requiring a different compensation logic.
 
-### Definitions
+**Disclaimer**
+This is just a proof of concept and not based on data, a thorough review of the literature or knowledge from multiple experts. It is designed to show how a decision-making process could include a scoring-based tool as support to inform the scale of the compensation project required to offset a HADD. This should not be used as is and needs proper checking and parameterisation before real-world usage.
 
-**Compensation**: refers to measures taken to offset the adverse effects of activities that harm fish or fish habitat. This is particularly relevant when an activity results in a HADD of fish habitat or death of fish. Compensation is typically part of a broader plan to maintain the productivity and sustainability of fish habitats and fisheries. It involves actions such as restoration of degraded habitats, enhancement of existing habitat, creation new habitat, and protection of existing habitat.
+## Definitions
+
+**Compensation**: refers to measures taken to offset the adverse effects of activities that harm fish or fish habitat. This is particularly relevant when an activity results in a HADD of fish habitat or death of fish. Compensation is typically part of a broader plan to maintain the productivity and sustainability of fish habitats and fisheries. It involves actions such as restoration of degraded habitats, enhancement of existing habitat, creation of new habitat, and protection of existing habitat.
 
 **Compensation ratio**: the habitat compensation ratio refers to the proportion of habitat that must be restored, enhanced, or created to compensate for habitat that has been harmed, altered, disrupted, or destroyed (HADD) due to a work, undertaking or activity (WUA). This is usually defined in practice as a measure of area of the compensation divided by the area of the HADD.
 
-**Ecosystem service factors (ESF)**: are variables or axes that are considered important for decision-making for compensation under the Fisheries Act. ESF can be processes or characteristics of a habitat that provide a service to nature consider useful for human use. For example a habitat's capacity to support juvenile fish rearing could be considered a nursery ESF. A near shore sandbank habitat might be considered a coastal erosion protection ESF.
+**Ecosystem service factors (ESF)**: are variables or axes that are considered important for decision-making for compensation under the Fisheries Act. ESF can be processes or characteristics of a habitat that provide a service to nature considered useful for human use. For example, a habitat's capacity to support juvenile fish rearing could be considered a nursery ESF. A near-shore sandbank habitat might be considered a coastal erosion protection ESF.
 
-**Fish habitat** means water frequented by fish and any other areas on which fish depend directly or indirectly to carry out their life processes, including spawning grounds and nursery, rearing, food supply and migration areas (FA - definitions).
+**Fish habitat** means water frequented by fish and any other areas on which fish depend directly or indirectly to carry out their life processes, including spawning grounds and nursery, rearing, food supply and migration areas (FA — definitions).
 
-**Harmful alteration, disruption or destruction of fish habitat (HADD)**: the Fisheries Act prohibits the harmful alteration, disruption or destruction of fish habitat commonly referred to as HADD. A HADD results from any human activity or WUA (see below). A HADD could be an impact on areas essential for fish survival, such as spawning grounds, nursery areas, and migration routes.
+**Harmful alteration, disruption or destruction of fish habitat (HADD)**: the Fisheries Act prohibits the harmful alteration, disruption or destruction of fish habitat, commonly referred to as HADD. A HADD results from any human activity or WUA (see below). A HADD could be an impact on areas essential for fish survival, such as spawning grounds, nursery areas, and migration routes. CHART recognises three types of HADD (see *Types of HADD* below).
 
 **Offset**: effectively the same as Compensation.
 
+**Temporal Compensation Multiplier (TCM)**: a multiplier that accounts for the time lag between the occurrence of the HADD and the moment the compensation habitat reaches full ecological function. A compensation project that takes years to complete and further years to reach peak function delivers fewer total ecological service-years over the planning horizon than a habitat at full function today. The TCM inflates the required compensation area to account for this deficit. It is calculated as the ratio of the total undiscounted service-years that would be delivered by a fully functional habitat over the time horizon $T_{max}$ to the service-years actually delivered by the compensation habitat given its construction lag and restoration ramp-up period (see *Temporal Compensation and the TCM* below).
+
 **Work, undertaking or activity (WUA)** is a prescribed work, undertaking or activity or belongs to a prescribed class of works, undertakings or activities, as the case may be, or is carried on in or around prescribed Canadian fisheries waters, and the work, undertaking or activity is carried on in accordance with the prescribed conditions (FA 34.4.2a).
 
-## Decision Making Under the Fisheries Act
+---
 
-### General considerations for decision making, Fisheries Act section 2.5
+# Types of HADD
+
+Not all HADDs are equivalent in nature or duration. CHART explicitly distinguishes three types of HADD, each of which triggers a different compensation formula. Selecting the correct HADD type is the first step in any CHART analysis.
+
+## Destruction / Destruction
+
+A **destruction** HADD represents a **permanent and complete loss** of fish habitat function. The entire area affected is rendered non-functional indefinitely. Full compensation is required for the entire HADD footprint.
+
+*Formula:*
+
+$$A_{comp} = A_{HADD} \times \frac{S_{dest}}{S_{comp}} \times TCM \times B_{adj}$$
+
+*Un HADD de type **destruction** représente une **perte permanente et complète** de la fonction de l'habitat. La totalité de la superficie affectée est rendue non fonctionnelle de façon permanente. Une compensation complète est requise pour l'ensemble de l'empreinte de l'APDN.*
+
+---
+
+## Deterioration / Détérioration
+
+A **deterioration** HADD represents a **permanent but partial loss** of habitat function. The habitat continues to exist but delivers only a reduced level of ecological service. Compensation is required only for the fraction of function that is permanently lost, expressed as a percentage (the deterioration percentage).
+
+*Formula:*
+
+$$A_{comp} = A_{HADD} \times f_{det} \times \frac{S_{dest}}{S_{comp}} \times TCM \times B_{adj}$$
+
+where $f_{det}$ is the deterioration fraction (deterioration % / 100).
+
+*Un HADD de type **détérioration** représente une **perte permanente mais partielle** de la fonction de l'habitat. L'habitat continue d'exister mais ne fournit qu'un niveau réduit de service écologique. La compensation n'est requise que pour la fraction de fonction définitivement perdue, exprimée en pourcentage (le pourcentage de détérioration).*
+
+---
+
+## Perturbation / Perturbation
+
+A **perturbation** HADD represents a **temporary loss** of habitat function. The habitat is fully or substantially blocked for a defined impact duration, then recovers to its baseline function over a recovery period. Because the loss is temporary, compensation is calculated in **service-years** rather than as a permanent area ratio. The required compensation area is the area needed to generate, over the planning horizon, enough ecological service-years to balance those lost during the impact and recovery period.
+
+*Formula:*
+
+$$gain\_years = \frac{T_{max}}{TCM}$$
+
+$$A_{comp} = \frac{A_{HADD} \times S_{dest} \times (t_{impact} + t_{recovery})}{S_{comp} \times gain\_years} \times B_{adj}$$
+
+where $t_{impact}$ is the duration of full blockage and $t_{recovery}$ is the time for habitat to return to baseline function after the impact ends.
+
+*Un HADD de type **perturbation** représente une **perte temporaire** de la fonction de l'habitat. L'habitat est totalement ou substantiellement bloqué pendant une durée d'impact définie, puis se rétablit à sa fonction de base sur une période de récupération. La compensation est calculée en **années-services** plutôt que comme un ratio de superficie permanent.*
+
+---
+
+## Variable definitions / Définition des variables
+
+| Symbol | Description (EN) | Description (FR) |
+|:------:|:-----------------|:-----------------|
+| $A_{comp}$ | Required compensation area (m²) | Surface de compensation requise (m²) |
+| $A_{HADD}$ | HADD area (m²) | Surface de l'APDN (m²) |
+| $S_{dest}$ | Weighted quality score of destroyed habitat | Score de qualité pondéré de l'habitat détruit |
+| $S_{comp}$ | Weighted quality score of compensation habitat | Score de qualité pondéré de l'habitat de compensation |
+| $TCM$ | Temporal Compensation Multiplier | Multiplicateur de Compensation Temporelle |
+| $B_{adj}$ | Baseline adjustment: $1/(1 - baseline\%)$ | Ajustement de la fonction de base |
+| $f_{det}$ | Deterioration fraction | Fraction de détérioration |
+| $t_{impact}$ | Impact duration (years) — perturbation only | Durée de l'impact (années) — perturbation uniquement |
+| $t_{recovery}$ | Recovery time (years) — perturbation only | Temps de récupération (années) — perturbation uniquement |
+| $gain\_years$ | Effective years of full function delivered by compensation over $T_{max}$ | Années effectives de pleine fonction de la compensation sur $T_{max}$ |
+| $T_{max}$ | Planning time horizon (years) | Horizon temporel de planification (années) |
+
+---
+
+# Temporal Compensation and the TCM
+
+## English
+
+The **Temporal Compensation Multiplier (TCM)** accounts for the fact that a compensation project rarely delivers full ecological function from day one. There is typically a construction lag before the project is complete, followed by a restoration or establishment period before the habitat reaches its full ecological potential. During this entire period, the compensation habitat is delivering fewer service-years than an equivalent area at full function would.
+
+The TCM is calculated over a defined planning horizon $T_{max}$ (default 50 years) using a simple linear ramp-up model:
+
+- **Phase 1 (0 to completion time):** Zero ecological function — the project is under construction.
+- **Phase 2 (completion to full-function time):** Linear increase from zero to full function — the habitat is establishing.
+- **Phase 3 (full-function time to $T_{max}$):** Full ecological function maintained.
+
+The TCM is then:
+
+$$TCM = \frac{T_{max}}{\sum_{t=0}^{T_{max}-1} B_t}$$
+
+where $B_t$ is the proportion of full ecological function at year $t$. Because the denominator (total service-years actually gained) is always less than or equal to $T_{max}$, the TCM is always $\geq 1$. A TCM of 1.5, for example, means the compensation area must be 50% larger than a simple habitat-quality ratio would suggest, to make up for the years of reduced function during construction and establishment.
+
+The TCM interacts with HADD type as follows:
+
+- **Destruction / Deterioration:** the TCM multiplies the required area directly, increasing it to offset the service-year deficit over the planning horizon.
+- **Perturbation:** the TCM is used to derive $gain\_years = T_{max} / TCM$, the effective number of years of full function the compensation delivers. A higher TCM means fewer effective gain-years, which requires a larger compensation area.
+
+## Français
+
+Le **Multiplicateur de Compensation Temporelle (MCT)** tient compte du fait qu'un projet de compensation fournit rarement une fonction écologique complète dès le premier jour. Il y a généralement un délai de construction avant que le projet soit achevé, suivi d'une période de restauration ou d'établissement avant que l'habitat atteigne son plein potentiel écologique.
+
+Le MCT est calculé sur un horizon de planification $T_{max}$ défini (50 ans par défaut) en utilisant un modèle d'augmentation linéaire simple :
+
+- **Phase 1 (0 jusqu'à l'achèvement) :** Zéro fonction écologique — le projet est en construction.
+- **Phase 2 (achèvement jusqu'à la pleine fonction) :** Augmentation linéaire de zéro à la pleine fonction — l'habitat s'établit.
+- **Phase 3 (pleine fonction jusqu'à $T_{max}$) :** Pleine fonction écologique maintenue.
+
+Le MCT est alors :
+
+$$MCT = \frac{T_{max}}{\sum_{t=0}^{T_{max}-1} B_t}$$
+
+Un MCT de 1,5, par exemple, signifie que la surface de compensation doit être 50 % plus grande que ce que le simple ratio de qualité d'habitat suggérerait.
+
+---
+
+# Baseline Function Adjustment / Ajustement de la fonction de base
+
+## English
+
+In many compensation scenarios, the proposed compensation site already provides some level of ecological function before any enhancement work begins. If this existing baseline function is not accounted for, the required compensation area will be underestimated — because only the *improvement* in function contributes to offsetting the HADD, not the function that was already there.
+
+CHART accounts for this through the **baseline adjustment factor**:
+
+$$B_{adj} = \frac{1}{1 - baseline\%/100}$$
+
+For example, if the compensation site already functions at 50% of its potential, $B_{adj} = 1/(1-0.5) = 2.0$, meaning the required area must be doubled. The baseline percentage is user-defined and applies equally to all three HADD types.
+
+## Français
+
+Dans de nombreux scénarios de compensation, le site de compensation proposé fournit déjà un certain niveau de fonction écologique avant le début des travaux d'amélioration. Si cette fonction de base existante n'est pas prise en compte, la surface de compensation requise sera sous-estimée — car seule *l'amélioration* de la fonction contribue à compenser l'APDN.
+
+CHART en tient compte via le **facteur d'ajustement de la fonction de base** :
+
+$$B_{adj} = \frac{1}{1 - base\%/100}$$
+
+Par exemple, si le site de compensation fonctionne déjà à 50 % de son potentiel, $B_{adj} = 2{,}0$, ce qui signifie que la surface requise doit être doublée.
+
+---
+
+# Decision Making Under the Fisheries Act
+
+## General considerations for decision making, Fisheries Act section 2.5
 
 Except as otherwise provided in this Act, when making a decision under this Act, the Minister may consider, among other things:
 
-  a) the application of a precautionary approach and an ecosystem approach;
-  b) the sustainability of fisheries;
-  c) scientific information;
-  d) Indigenous knowledge of the Indigenous peoples of Canada that has been provided to the Minister;
-  e) community knowledge;
-  f) cooperation with any government of a province, any Indigenous governing body and any body — including a co-management body — established under a land claims agreement;
-  g) social, economic and cultural factors in the management of fisheries;
-  h) the preservation or promotion of the independence of licence holders in commercial inshore fisheries; and
-  i) the intersection of sex and gender with other identity factors.
+a) the application of a precautionary approach and an ecosystem approach;
+b) the sustainability of fisheries;
+c) scientific information;
+d) Indigenous knowledge of the Indigenous peoples of Canada that has been provided to the Minister;
+e) community knowledge;
+f) cooperation with any government of a province, any Indigenous governing body and any body — including a co-management body — established under a land claims agreement;
+g) social, economic and cultural factors in the management of fisheries;
+h) the preservation or promotion of the independence of licence holders in commercial inshore fisheries; and
+i) the intersection of sex and gender with other identity factors.
 
-### Specific factors that shall be considered, Fisheries Act section 34.1
+## Specific factors that shall be considered, Fisheries Act section 34.1
 
 The Minister, prescribed person or prescribed entity, as the case may be, shall consider the following factors:
 
-  a) the contribution to the productivity of relevant fisheries by the fish or fish habitat that is likely to be affected;
-  b) fisheries management objectives; 
-  c) whether there are measures and standards:
-     i) to avoid the death of fish or to mitigate the extent of their death or offset their death, or
-     ii) to avoid, mitigate or offset the harmful alteration, disruption or destruction of fish habitat;
-  d) the cumulative effects of the carrying on of the work, undertaking or activity referred to in a recommendation or an exercise of power, in combination with other works, undertakings or activities that have been or are being carried on, on fish and fish habitat;
-  e) any fish habitat banks, as defined in section 42.01, that may be affected;
-  f) whether any measures and standards to offset the harmful alteration, disruption or destruction of fish habitat give priority to the restoration of degraded fish habitat;
-  g) Indigenous knowledge of the Indigenous peoples of Canada that has been provided to the Minister; and
-  h) any other factor that the Minister considers relevant.
+a) the contribution to the productivity of relevant fisheries by the fish or fish habitat that is likely to be affected;
+b) fisheries management objectives;
+c) whether there are measures and standards:
+   i) to avoid the death of fish or to mitigate the extent of their death or offset their death, or
+   ii) to avoid, mitigate or offset the harmful alteration, disruption or destruction of fish habitat;
+d) the cumulative effects of the carrying on of the work, undertaking or activity referred to in a recommendation or an exercise of power, in combination with other works, undertakings or activities that have been or are being carried on, on fish and fish habitat;
+e) any fish habitat banks, as defined in section 42.01, that may be affected;
+f) whether any measures and standards to offset the harmful alteration, disruption or destruction of fish habitat give priority to the restoration of degraded fish habitat;
+g) Indigenous knowledge of the Indigenous peoples of Canada that has been provided to the Minister; and
+h) any other factor that the Minister considers relevant.
 
-## Calculating compensation area required to offset a HADD
+---
 
-A method has been developed to provide a systematic and quantitative method for estimating the required compensation area for habitat loss (HADD) even without fully quantitative knowledge and data. It addresses scenarios where a habitat becomes partially or fully unavailable to fulfill its ecological function as a fish habitat; therefore, a new or existing habitat must be enhanced or restored as compensation. The goal is to balance the ecological functions and services lost in the original habitat with those provided by the compensation area. This function is particularly useful for decision-makers, ecologists, and planners who need to evaluate trade-offs and ensure that compensation efforts are ecologically meaningful and defensible and to facilitate a conversation about uncertainty thus creating a transparent decision support tool for fish habitat compensation projects and habitat banking.
+# Calculating compensation area required to offset a HADD
 
-The core purpose of the method is to incorporate variability and uncertainty to calculate compensation ratios between habitats. It achieves this by considering multiple ecological or functional factors that contribute to habitat value (e.g., biodiversity, productivity, or resilience). These factors are given relative importance through user-defined weights and are evaluated across both the HADD and compensated habitats. By doing so, the function ensures that the compensation calculation reflects the multifaceted nature of habitat quality and the inherent differences between habitats. The weights assigned to the different factors corresponds to the importance in decision making assigned to these ecological factors and their ecosystem service function.
+A method has been developed to provide a systematic and quantitative approach for estimating the required compensation area for habitat loss (HADD) even without fully quantitative knowledge and data. It addresses scenarios where a habitat becomes partially or fully unavailable to fulfil its ecological function as a fish habitat; therefore, a new or existing habitat must be enhanced or restored as compensation. The goal is to balance the ecological functions and services lost in the original habitat with those provided by the compensation area over a defined planning horizon.
 
-The method employs Monte Carlo simulations to address variability and uncertainty in the ESF scores. For each simulation, random values are sampled from user-defined ranges for each ESF in both the HADD and compensation habitats. These scores are combined using weighted averages, reflecting the relative importance of each ESF for decision making^[weights for decision making are not necessarily importance weights for ecological function though they should be roughly similar as legislated protections leading to the policy for decision making likely follows from importance as an ecosystem service.]. The destruction area's size is then scaled by the ratio of the weighted scores of the destroyed and compensated habitats, providing an adjusted compensation area for each simulation.
+The core purpose of the method is to incorporate variability and uncertainty to calculate compensation areas between habitats. It achieves this by considering multiple ecological or functional factors that contribute to habitat value (e.g., biodiversity, productivity, or resilience). These factors are given relative importance through user-defined weights and are evaluated across both the HADD and compensated habitats. By doing so, the function ensures that the compensation calculation reflects the multifaceted nature of habitat quality and the inherent differences between habitats.
 
-The outputs of the function include key statistical metrics such as the mean, median, and standard deviation of the simulated compensation areas, as well as a confidence interval around these estimates. These metrics provide decision-makers with a clear understanding of the expected compensation area and the uncertainty associated with it. Additionally, the function returns the raw simulated areas, which can be used for further analysis or visualization.
+The method employs Monte Carlo simulations to address variability and uncertainty in the ESF scores. For each simulation, random values are sampled from user-defined ranges for each ESF in both the HADD and compensation habitats. These scores are combined using weighted averages, reflecting the relative importance of each ESF for decision making^[weights for decision making are not necessarily importance weights for ecological function though they should be roughly similar as legislated protections leading to the policy for decision making likely follows from importance as an ecosystem service.]. The HADD area is then scaled by the ratio of the weighted scores of the destroyed and compensated habitats, with additional adjustment for HADD type, temporal considerations (TCM), and baseline function at the compensation site.
 
-Users can define up to five ESF, with ranges importance score ranges for both the HADD and compensation habitats. The relative importance of these ESF in the decision process are provided by the user. The weights are the weights in the decision making process and therefore reflect things such legislation, policy, management objectives and stakeholder priorities and the question relative to the two habitat being considered. For instance, in one scenario, biodiversity might be given the highest weight, while in another, ESFs like sediment stabilization or fish feeding area might take precedence.
+The outputs of the function include key statistical metrics such as the mean, median, and confidence interval of the simulated compensation areas. These metrics provide decision-makers with a clear understanding of the expected compensation area and the uncertainty associated with it. The raw simulated areas are also returned and can be used for further analysis or visualisation.
 
-The method is general and not tied to any specific habitat type or ecological context, making it applicable across a wide range of ecosystems and compensation scenarios. By incorporating stochastic sampling and allowing for customised parameters, the method provides a framework for estimating compensation requirements that accounts for both ecological complexity and uncertainty. This makes it a tool to examine no net loss or net gain of ecological function, a cornerstone principle in habitat management and environmental impact mitigation under the Fisheries Act.
+Users can define up to five ESF, with score ranges for both the HADD and compensation habitats. The relative importance of these ESF in the decision process is provided by the user. The weights reflect things such as legislation, policy, management objectives and stakeholder priorities relative to the two habitats being considered. The weights are fixed and are intentionally not resampled from a range. If they were resampled, it would imply the decision-making body lacks the capacity to make consistent decisions based on evidence.
 
-The method bridges the gap between theory and practice by offering a transparent, repeatable, and scientifically grounded approach to compensation area calculation. Its reliance on stochastic methods ensures that variability and uncertainty are explicitly considered.
+The method is general and not tied to any specific habitat type or ecological context, making it applicable across a wide range of ecosystems and compensation scenarios. By incorporating stochastic sampling and allowing for customised parameters, the method provides a framework for estimating compensation requirements that accounts for both ecological complexity and uncertainty.
 
-## Proof-of-concept example (scores and weights are not based on evidence)
+---
 
-This example considers a hypothetical situation where the destruction of a Zostera eelgrass bed is to be compensated or offset by building a Laminaria kelp reef. The analyst needs to decide what ESFs should be considered in such a process. In this case, we chose to consider each of these habitats for five ESFs, which can generally be thought of as contributions to ecosystem services:
+# Proof-of-concept example (scores and weights are not based on evidence)
 
-1. As Biodiversity support in the system generally
+This example considers a hypothetical situation where the destruction of a *Zostera* eelgrass bed is to be compensated or offset by building a *Laminaria* kelp reef. The analyst needs to decide what ESFs should be considered in such a process. In this case, we chose to consider each of these habitats for five ESFs, which can generally be thought of as contributions to ecosystem services:
+
+1. As a Biodiversity support in the system generally
 2. As a Feeding area for fish (fish as defined by the Fisheries Act)
 3. As a Migration area for fish in transit
 4. As a Nursery area for fish
 5. As a Stabilisation habitat that prevents coastal erosion
 
-For each of these ESFs, the analyst needs to weight their importance in the decision support process. For example, Feeding and Nursery support functions may be considered the most important, while Biodiversity is the next most important, and Migration and Stabilisation are the least important of the five ESFs. Therefore, weights are assigned accordingly and should sum to 1. These weights are essentially decision-process weights rather than direct biological contribution weights. The weights should reflect what the Fisheries Act (Government of Canada, 2019) and a fish habitat manager think is the relative importance of each ESF in the decision-making process. This is why there is a single weight assigned to each ESF regardless of the habitat type. This approach differs slightly from the contribution of an ecosystem function to ecosystem health, as that aspect is addressed through scoring.
+For each of these ESFs, the analyst needs to weight their importance in the decision support process. For example, Feeding and Nursery support functions may be considered the most important, while Biodiversity is the next most important, and Migration and Stabilisation are the least important of the five ESFs. Therefore, weights are assigned accordingly. These weights are essentially decision-process weights rather than direct biological contribution weights and should reflect what the Fisheries Act and a fish habitat manager think is the relative importance of each ESF in the decision-making process.
 
-The weights are fixed and are intentionally not resampled from a range. If they were resampled, it would imply the decision-making body lacks the capacity to make consistent decisions based on evidence. If the decision-making body cannot provide definitive weights, the issue goes beyond developing a decision-support tool. However, a different kind of analysis could include institutional uncertainty in the decision-making process where the weights could be sampled from a distribution. Such an exercise includes a broader range of questions about decision-making generally. We have deliberately not implemented this because it considerably complexifies the question on the use of such a tool even though it is easy to code.
+The analyst must provide a contribution score range for each ESF for each habitat type, for both the HADD habitat and the compensation habitat. The analyst may not know exactly how important an eelgrass habitat is for its role as fish nursery habitat, but they know from the literature that this is an important function of eelgrass habitats. Consequently, they might rank it from 3 to 4 (with 5 being the maximum), while kelp reefs may be less important for this function in eastern Canada but still significant, resulting in a rank of 2 to 3.
 
-The analyst must provide a contribution score range for each ESF for each habitat type, that is, for both the HADD habitat and the compensation habitat. The analyst may not know exactly how important an eelgrass habitat is for its role as fish nursery habitat, but they know from the literature that this is an important function of eelgrass habitats. Consequently, they might rank it from 3 to 4 (with 5 being the maximum), while kelp reefs may be less important for this function in eastern Canada but still significant, resulting in a rank of 2 to 3.
-
-Once the ESFs are chosen, the weights assigned to each ESF in the decision-making process, and score ranges developed for both the HADD and compensation habitats, the model can be run. The model simulates scores over a number of iterations (e.g., 1000), sampling from the specified ranges for each ESF using a uniform distribution. These sampled scores are weighted by their assigned weights, and the ratio of the weighted scores of the HADD habitat to the compensation habitat is calculated, yielding a compensation ratio with an associated range. This compensation ratio is then multiplied by the area of the HADD habitat to determine the compensation habitat area needed to offset the HADD. The uncertainty in the scores allows for calculating a mean value and confidence interval for the required compensation area, ultimately resulting in a distribution of potential compensation areas.
+The example below uses a **destruction** HADD type — the eelgrass bed is permanently and completely lost. A time lag of 2 years to completion and a 5-year restoration ramp-up period are assumed, giving a TCM > 1 that inflates the required compensation area to account for the years of reduced function during establishment. The compensation site is assumed to have a 50% existing baseline function, which doubles the required area via the baseline adjustment.
 
 *Table 1: User score can range from 0 to 5 where 5 is a key ecosystem service. The evidence citation for its importance and the weight of that ecosystem service in the decision making process relative to other named services. Each ecosystem service factor must have a weight in the decision-making process which can be zero. Weights for each service will be the same for both habitats.*
 
 | **Ecosystem service** | **Importance score range** | **Evidence** | **Decision weight** |
 |:-----------------------|:-------------------------:|:---------------------:|:-------------------:|
 | *Zostera (HADD)*       |                           |                       |                     |
-| &nbsp;&nbsp;&nbsp;Biodiversity           | 3-5                       | publication                | 0.2                 |
-| &nbsp;&nbsp;&nbsp;Feeding                | 4-5                       | publication                  | 0.3                 |
-| &nbsp;&nbsp;&nbsp;Migration              | 1-2                       | publication                   | 0.1                 |
-| &nbsp;&nbsp;&nbsp;Nursery                | 3-4                       | publication                  | 0.3                 |
-| &nbsp;&nbsp;&nbsp;Coastal Stabilisation  | 3-5                       | publication                | 0.1                 |
+| &nbsp;&nbsp;&nbsp;Biodiversity          | 3-5 | publication | 0.2 |
+| &nbsp;&nbsp;&nbsp;Feeding               | 4-5 | publication | 0.3 |
+| &nbsp;&nbsp;&nbsp;Migration             | 1-2 | publication | 0.1 |
+| &nbsp;&nbsp;&nbsp;Nursery               | 3-4 | publication | 0.3 |
+| &nbsp;&nbsp;&nbsp;Coastal Stabilisation | 3-5 | publication | 0.1 |
 |                        |                           |                       |                     |
-| *Laminaria (Offset)* |                           |                       |                     |
-| &nbsp;&nbsp;&nbsp;Biodiversity           | 3-5                       | publication                  | 0.2                 |
-| &nbsp;&nbsp;&nbsp;Feeding                | 2-3                       | publication                | 0.3                 |
-| &nbsp;&nbsp;&nbsp;Migration              | 2-4                       | publication                | 0.1                 |
-| &nbsp;&nbsp;&nbsp;Nursery                | 2-3                       | publication                | 0.3                 |
-| &nbsp;&nbsp;&nbsp;Coastal Stabilisation  | 1-2                       | publication                   | 0.1                 |
+| *Laminaria (Offset)*   |                           |                       |                     |
+| &nbsp;&nbsp;&nbsp;Biodiversity          | 3-5 | publication | 0.2 |
+| &nbsp;&nbsp;&nbsp;Feeding               | 2-3 | publication | 0.3 |
+| &nbsp;&nbsp;&nbsp;Migration             | 2-4 | publication | 0.1 |
+| &nbsp;&nbsp;&nbsp;Nursery               | 2-3 | publication | 0.3 |
+| &nbsp;&nbsp;&nbsp;Coastal Stabilisation | 1-2 | publication | 0.1 |
 
 \pagebreak
 
 ```{r realisticsim, echo=TRUE, fig.width=16, fig.height=18}
 
-
 destruction_area <- 5000  # m²
 
-factor_names <- c("Biodiversity", "Feeding", "Migration", "Nursery", "Stabilisation")
+factor_names_en <- c("Biodiversity", "Feeding", "Migration", "Nursery", "Stabilisation")
+factor_names_fr <- c("Biodiversité", "Alimentation", "Migration", "Nurserie", "Stabilisation")
 
-weights <- c(0.2, 0.3, 0.1, 0.3, 0.1)  # Weights for each factor
+weights <- c(0.2, 0.3, 0.1, 0.3, 0.1)
 
 # Factor score ranges for destroyed habitat
 factor_ranges_destroyed <- list(
   factor1 = c(3, 5),  # biodiversity
-  factor2 = c(4, 5), # feeding
-  factor3 = c(1, 2), # migration
-  factor4 = c(3, 4), # nursery
-  factor5 = c(3, 5) # sediment stabilisation
+  factor2 = c(4, 5),  # feeding
+  factor3 = c(1, 2),  # migration
+  factor4 = c(3, 4),  # nursery
+  factor5 = c(3, 5)   # sediment stabilisation
 )
 
 # Factor score ranges for compensated habitat
 factor_ranges_compensated <- list(
   factor1 = c(3, 5),  # biodiversity
-  factor2 = c(2, 3), # feeding
-  factor3 = c(2, 4), # migration
-  factor4 = c(2, 3), # nursery
-  factor5 = c(1, 2) # sediment stabilisation
+  factor2 = c(2, 3),  # feeding
+  factor3 = c(2, 4),  # migration
+  factor4 = c(2, 3),  # nursery
+  factor5 = c(1, 2)   # sediment stabilisation
 )
 
-# Run the function
+# Temporal compensation multiplier (2-year lag, 5-year ramp-up, 50-year horizon)
+tcm_details <- calculate_tcm_details(
+  time_lag_years           = 2,
+  restoration_period_years = 5,
+  T_max                    = 50
+)
+
+# HADD type = "destruction": permanent complete loss
 result <- calculate_compensation_area(
-  destruction_area = destruction_area, 
-  factor_ranges_destroyed = factor_ranges_destroyed, 
-  factor_ranges_compensated = factor_ranges_compensated, 
-  weights = weights,
-  num_simulations = 50000, 
-  quantiles = c(0.025, 0.975), 
-  habitat_names = c("Zostera", "Laminaria"), 
-  factor_names = factor_names
+  destruction_area          = destruction_area,
+  factor_ranges_destroyed   = factor_ranges_destroyed,
+  factor_ranges_compensated = factor_ranges_compensated,
+  weights                   = weights,
+  temporal_comp_multiplier  = tcm_details$temporal_comp_multiplier,
+  baseline_function_pct     = 50,
+  num_simulations           = 50000,
+  quantiles                 = c(0.025, 0.975),
+  habitat_names_en          = c("Zostera", "Laminaria"),
+  habitat_names_fr          = c("Zostère", "Laminaires"),
+  factor_names_en           = factor_names_en,
+  factor_names_fr           = factor_names_fr,
+  hadd_type                 = "destruction"
 )
 
-# Example visualization
-plot_compensation_analysis(result, quantiles = c(0.025, 0.975))
-
+plot_compensation_analysis(result, quantiles = c(0.025, 0.975), lang = "en")
 ```
 
-*Figure 1: A proof-of-concept simulation for a fish compensation project where a Laminaria (kelp) reef is built to compensate/offset a Zostera (eelgrass) bed HADD. The user is required to score a range of the level of contribution for an ecosystem service factor from 0 to 5 and assign a weight from 0 to 1 for the importance of each of the factors in the decision support process. The opacity of the bars in the top panel is proportional to the importance weight assigned to a factor (more opaque is more important). The middle panel shows how much habitat is needed to compensate for the HADD and the bottom panel shows the distribution of the compensation area needed given the uncertainty in the ecosystem service factor scores and importance weights assigned to each factor. The vertical lines on the bottom panel represent the 2.5th, 50th and 97.5th percentiles of the distribution of required compensation area.*
+*Figure 1: A proof-of-concept simulation for a fish compensation project (HADD type: Destruction) where a Laminaria (kelp) reef is built to compensate/offset a Zostera (eelgrass) bed HADD. The HADD type is indicated in the panel titles and by the colour coding of the horizontal bar chart (red = destruction, orange = deterioration, purple = perturbation). The top panel shows the ecosystem service factor scores for each habitat, with bar opacity proportional to the decision weight assigned to each factor. The middle panel shows the HADD area and required median compensation area with its 95% confidence interval. The bottom panel shows the full distribution of simulated compensation areas; the dashed red line is the median and the dotted green lines are the 2.5th and 97.5th percentiles. The annotation box also reports the median and 95% CI numerically.*
 
+```{r deterioration_example, echo=TRUE, fig.width=16, fig.height=18}
 
-The example shows that given the ESFs, their score ranges and weights, a 5000 m² HADD in an Zostera bed would require a mean value (50% chance of no net loss) of about 6818 m² of Laminaria offset to compensate for it (Fig. 1). Given the uncertainty in the ESF scores, the 2.5th and 97.5 quantile confidence intervals give a range of 5840 m² and 8030 m², respectively. The compensation ratio Zostera/Laminaria in this hypothetical example with a 95% confidence interval is 1.17 $\leq$ 1.36 $\leq$ 1.61. That means Zostera (in this hypothetical example only) has a value as a habitat of equal area that is 1.36 times more important than Laminaria on average but it could be as low as 1.17 times or as much as 1.61 times greater.
+# HADD type = "deterioration": permanent partial loss (60% of function lost)
+result_det <- calculate_compensation_area(
+  destruction_area          = destruction_area,
+  factor_ranges_destroyed   = factor_ranges_destroyed,
+  factor_ranges_compensated = factor_ranges_compensated,
+  weights                   = weights,
+  temporal_comp_multiplier  = tcm_details$temporal_comp_multiplier,
+  baseline_function_pct     = 50,
+  num_simulations           = 50000,
+  quantiles                 = c(0.025, 0.975),
+  habitat_names_en          = c("Zostera", "Laminaria"),
+  habitat_names_fr          = c("Zostère", "Laminaires"),
+  factor_names_en           = factor_names_en,
+  factor_names_fr           = factor_names_fr,
+  hadd_type                 = "deterioration",
+  deterioration_pct         = 60
+)
 
-The distribution of the compensation area could be used to determine a quantile other than 50% (the median compensation) if one were required to offset a HADD with a great probability of fully offsetting the HADD. that is, one might choose a compensation larger than 50% (equal chance of over- or under-offsetting) to assure that the intended offset is achieved. The process is directly a risk (based on uncertainty) process where one could choose the 97.5 percentile of the compensation area (largest extent of error bar in panel 2 of Fig. 1 = 8030 m²) to statistically assure that a HADD is fully offset by the compensation project.
+plot_compensation_analysis(result_det, quantiles = c(0.025, 0.975), lang = "en")
+```
 
-## Real world application
+*Figure 2: The same habitat pair under a deterioration HADD (60% of function permanently lost). Only the lost fraction requires compensation, so the required area is smaller than under full destruction. The panel titles and bar colour (orange) reflect the deterioration HADD type, and the annotation box shows the deterioration percentage.*
+
+```{r perturbation_example, echo=TRUE, fig.width=16, fig.height=18}
+
+# HADD type = "perturbation": temporary loss (2-year impact, 3-year recovery)
+result_pert <- calculate_compensation_area(
+  destruction_area          = destruction_area,
+  factor_ranges_destroyed   = factor_ranges_destroyed,
+  factor_ranges_compensated = factor_ranges_compensated,
+  weights                   = weights,
+  temporal_comp_multiplier  = tcm_details$temporal_comp_multiplier,
+  baseline_function_pct     = 50,
+  num_simulations           = 50000,
+  quantiles                 = c(0.025, 0.975),
+  habitat_names_en          = c("Zostera", "Laminaria"),
+  habitat_names_fr          = c("Zostère", "Laminaires"),
+  factor_names_en           = factor_names_en,
+  factor_names_fr           = factor_names_fr,
+  hadd_type                 = "perturbation",
+  impact_duration_years     = 2,
+  recovery_time_years       = 3
+)
+
+plot_compensation_analysis(result_pert, quantiles = c(0.025, 0.975), lang = "en")
+```
+
+*Figure 3: The same habitat pair under a perturbation HADD (2-year full blockage, 3-year recovery). Compensation is calculated in service-years: the required area is the area needed to generate enough ecological service-years over the planning horizon to offset the temporary loss. The panel titles and bar colour (purple) reflect the perturbation HADD type, and the annotation box shows the impact and recovery durations.*
+
+The three examples illustrate how HADD type fundamentally changes the required compensation area:
+
+- **Destruction** (Fig. 1): full area × quality ratio × TCM × baseline adjustment.
+- **Deterioration at 60%** (Fig. 2): as destruction but multiplied by 0.60 — only the lost fraction is compensated.
+- **Perturbation** (Fig. 3): service-years logic — typically requires a smaller area than destruction when the impact and recovery period is short relative to the planning horizon.
+
+The distribution of the compensation area can be used to select a quantile other than 50% (the median) if one requires a greater probability of fully offsetting the HADD. For instance, one might choose the 97.5th percentile to statistically ensure that the HADD is fully offset. This is directly a risk-based process: the 50th percentile gives only a 50% chance of achieving no net loss, while a higher percentile provides greater assurance.
+
+---
+
+# Real world application
 
 To apply this in a real situation, an analyst would need to:
 
-1. Determine what are the important ESFs for the decision making process.
-2. Weigh the relative importance of each ESF in the decision making process. This is partially written into the Fisheries Act already when it names what is important to preserve. Other ESFs and their weights could come about through discussions between analysts and managers and being cognisant of things such as MPAs, EBSAs, SARA species and Indigenous areas of interest.
-3. Score each of the ESFs for their contribution to ecosystem health. This will be primarily based on literature search, expert knowledge and outcomes of previous compensation projects.
-4. Run the model with this parameterisation and the known area of the HADD and the proposed compensation area and project.
+1. Determine the **type of HADD** (destruction, deterioration, or perturbation) and, for deterioration, estimate the percentage of function permanently lost; for perturbation, estimate the impact duration and recovery time.
+2. Determine what are the important ESFs for the decision making process.
+3. Weigh the relative importance of each ESF in the decision making process. This is partially written into the Fisheries Act already when it names what is important to preserve. Other ESFs and their weights could come about through discussions between analysts and managers and being cognisant of things such as MPAs, EBSAs, SARA species and Indigenous areas of interest.
+4. Score each of the ESFs for their contribution to ecosystem health. This will be primarily based on literature search, expert knowledge and outcomes of previous compensation projects.
+5. Determine the **temporal parameters**: estimated years to completion of the compensation project and the additional years required to reach full ecological function. These feed into the TCM.
+6. Assess the **baseline function** at the proposed compensation site. If the site already provides some ecological function, the required area will be scaled up accordingly.
+7. Run the model with this parameterisation and the known area of the HADD and the proposed compensation area and project.
 
 One could potentially compensate for the HADD with a series of different projects by running this tool for just a proportion of a HADD and one compensation area at a time and offset the remainder of the HADD in another area by using this tool again to determine the level of offset required.
 
-### Number of ESF to consider
+## Number of ESF to consider
 
-The present tool by default has five ESF that can influence the determination of a compensation. The suite of ESF do not need to capture all the ecosystem functions provided by a habitat, just those that are considered important by the Fisheries Act, the analyst and interest holders. Many ESF are also likely highly correlated therefore, we see very little use and some danger in trying to include more than five ESF. Using several correlated ESFs will overweight a decision towards a particular general super-axis. Therefore it is important that the analyst carefully consider what is of prime importance for the decision making process. The weighting of each ESF is therefore very important and a zero weight is a very useful way to eliminate axes from the decision making process. The score on every axis with a positive weight needs to be researched and supported and therefore one would be wise to consider all weights equal to zero without evidence to the contrary.
+The present tool by default has five ESF that can influence the determination of a compensation. The suite of ESF do not need to capture all the ecosystem functions provided by a habitat, just those that are considered important by the Fisheries Act, the analyst and interest holders. Many ESF are also likely highly correlated; therefore, we see very little use and some danger in trying to include more than five ESF. Using several correlated ESFs will overweight a decision towards a particular general super-axis. Therefore it is important that the analyst carefully consider what is of prime importance for the decision making process. The weighting of each ESF is therefore very important and a zero weight is a very useful way to eliminate axes from the decision making process. The score on every axis with a positive weight needs to be researched and supported, and therefore one would be wise to consider all weights equal to zero without evidence to the contrary.
 
-## A general tool for determining compensation ratios and habitat bank equivalency
+---
 
-This tool is simply a means of determining a compensation ratio between two habitat types according to ESFs deemed important for ecosystem health and decision making under the Fisheries Act. If one uses the tool with a HADD area of 1 m², the tool will just produce a compensation ratio between two habitat types. One could therefore develop a database of compensation ratios by applying this tool for many pairs of habitat types. There may be little benefit in creating such as database, however, as new information may become available and could be incorporated in new analyses on both the weight of ESFs in decision making and the importance of ESFs in ecosystem health. The tool is also relatively easy and fast to run and therefore there is little advantage in trying to front-load analyses by creating a database of compensation ratios which are likely to change with arrival of new information.
+# A general tool for determining compensation ratios and habitat bank equivalency
 
-The value of deposits in a habitat bank could be assessed at the time of withdrawal from the bank using such a tool.
+This tool is simply a means of determining a compensation area between two habitat types according to ESFs deemed important for ecosystem health and decision making under the Fisheries Act. If one uses the tool with a HADD area of 1 m², the tool will produce a compensation ratio between two habitat types for any of the three HADD types. One could therefore develop a database of compensation ratios by applying this tool for many pairs of habitat types and HADD scenarios.
 
-The most difficult part of the process is its subjectivity in scoring and founding those scores in evidence. However by assigning a range to scores, uncertainty can be accounted for and the distribution of the compensation area transparently reflects this uncertainty. A manager therefore can determine which might be the best compensation-area quantile to choose and this tool at least facilitates a conversation about it. In fact, to account for the uncertainty, a decision maker should probably use a larger percentile than 50% since 50% is just equal probability of being above or below a no net loss compensation, i.e. it has only a 50% chance of fully compensating for the HADD.
+The value of deposits in a habitat bank could be assessed at the time of withdrawal from the bank using this tool, and the HADD type at withdrawal would determine which compensation formula applies.
 
+The most difficult part of the process is its subjectivity in scoring and founding those scores in evidence. However, by assigning a range to scores, uncertainty can be accounted for and the distribution of the compensation area transparently reflects this uncertainty. A manager can therefore determine which compensation-area quantile to choose given their risk tolerance. To account for the uncertainty, a decision maker should probably use a larger percentile than 50% since 50% is just equal probability of being above or below a no net loss compensation, i.e. it has only a 50% chance of fully compensating for the HADD.
+
+# Acknowledgements
+
+Alexandre-Bisonette Lafontaine and Annik Gagné walked me through the actual needs of the Fish Habitats Grou to try to make the tool useful for the analysts actually doing the work.

@@ -777,24 +777,23 @@ range</strong></th>
 
     plot_compensation_analysis(result, quantiles = c(0.025, 0.975), lang = "en")
 
-    ## Warning in annotate("label", x = x_max_limit * 0.6, y = Inf, vjust = 1.2, :
-    ## Ignoring unknown parameters: `label.size`
-
-![](readme_files/figure-markdown_strict/realisticsim-1.png)
-
-*Figure 1: A proof-of-concept simulation for a fish compensation project
-(HADD type: Destruction) where a Laminaria (kelp) reef is built to
-compensate/offset a Zostera (eelgrass) bed HADD. The HADD type is
-indicated in the panel titles and by the colour coding of the horizontal
-bar chart (red = destruction, orange = deterioration, purple =
-perturbation). The top panel shows the ecosystem service factor scores
-for each habitat, with bar opacity proportional to the decision weight
-assigned to each factor. The middle panel shows the HADD area and
-required median compensation area with its 95% confidence interval. The
-bottom panel shows the full distribution of simulated compensation
-areas; the dashed red line is the median and the dotted green lines are
-the 2.5th and 97.5th percentiles. The annotation box also reports the
-median and 95% CI numerically.*
+<figure>
+<img src="readme_files/figure-markdown_strict/realisticsim-1.png"
+alt="Figure 1: A proof-of-concept simulation for a fish compensation project (HADD type: Destruction) where a Laminaria (kelp) reef is built to compensate/offset a Zostera (eelgrass) bed HADD. The HADD type is indicated in the panel titles and by the colour coding of the horizontal bar chart (red = destruction, orange = deterioration, purple = perturbation). The top panel shows the ecosystem service factor scores for each habitat, with bar opacity proportional to the decision weight assigned to each factor. The middle panel shows the HADD area and required median compensation area with its 95% confidence interval. The bottom panel shows the full distribution of simulated compensation areas; the dashed red line is the median and the dotted green lines are the 2.5th and 97.5th percentiles. The annotation box also reports the median and 95% CI numerically." />
+<figcaption aria-hidden="true">Figure 1: A proof-of-concept simulation
+for a fish compensation project (HADD type: Destruction) where a
+Laminaria (kelp) reef is built to compensate/offset a Zostera (eelgrass)
+bed HADD. The HADD type is indicated in the panel titles and by the
+colour coding of the horizontal bar chart (red = destruction, orange =
+deterioration, purple = perturbation). The top panel shows the ecosystem
+service factor scores for each habitat, with bar opacity proportional to
+the decision weight assigned to each factor. The middle panel shows the
+HADD area and required median compensation area with its 95% confidence
+interval. The bottom panel shows the full distribution of simulated
+compensation areas; the dashed red line is the median and the dotted
+green lines are the 2.5th and 97.5th percentiles. The annotation box
+also reports the median and 95% CI numerically.</figcaption>
+</figure>
 
     # HADD type = "deterioration": permanent partial loss (60% of function lost)
     result_det <- calculate_compensation_area(
@@ -816,17 +815,17 @@ median and 95% CI numerically.*
 
     plot_compensation_analysis(result_det, quantiles = c(0.025, 0.975), lang = "en")
 
-    ## Warning in annotate("label", x = x_max_limit * 0.6, y = Inf, vjust = 1.2, :
-    ## Ignoring unknown parameters: `label.size`
-
-![](readme_files/figure-markdown_strict/deterioration_example-1.png)
-
-*Figure 2: The same habitat pair under a deterioration HADD (60% of
-function permanently lost). Only the lost fraction requires
-compensation, so the required area is smaller than under full
-destruction. The panel titles and bar colour (orange) reflect the
-deterioration HADD type, and the annotation box shows the deterioration
-percentage.*
+<figure>
+<img
+src="readme_files/figure-markdown_strict/deterioration_example-1.png"
+alt="Figure 2: The same habitat pair under a deterioration HADD (60% of function permanently lost). Only the lost fraction requires compensation, so the required area is smaller than under full destruction. The panel titles and bar colour (orange) reflect the deterioration HADD type, and the annotation box shows the deterioration percentage." />
+<figcaption aria-hidden="true">Figure 2: The same habitat pair under a
+deterioration HADD (60% of function permanently lost). Only the lost
+fraction requires compensation, so the required area is smaller than
+under full destruction. The panel titles and bar colour (orange) reflect
+the deterioration HADD type, and the annotation box shows the
+deterioration percentage.</figcaption>
+</figure>
 
     # HADD type = "perturbation": temporary loss (2-year impact, 3-year recovery)
     result_pert <- calculate_compensation_area(
@@ -849,17 +848,18 @@ percentage.*
 
     plot_compensation_analysis(result_pert, quantiles = c(0.025, 0.975), lang = "en")
 
-    ## Warning in annotate("label", x = x_max_limit * 0.6, y = Inf, vjust = 1.2, :
-    ## Ignoring unknown parameters: `label.size`
-
-![](readme_files/figure-markdown_strict/perturbation_example-1.png)
-
-*Figure 3: The same habitat pair under a perturbation HADD (2-year full
-blockage, 3-year recovery). Compensation is calculated in service-years:
-the required area is the area needed to generate enough ecological
-service-years over the planning horizon to offset the temporary loss.
-The panel titles and bar colour (purple) reflect the perturbation HADD
-type, and the annotation box shows the impact and recovery durations.*
+<figure>
+<img
+src="readme_files/figure-markdown_strict/perturbation_example-1.png"
+alt="Figure 3: The same habitat pair under a perturbation HADD (2-year full blockage, 3-year recovery). Compensation is calculated in service-years: the required area is the area needed to generate enough ecological service-years over the planning horizon to offset the temporary loss. The panel titles and bar colour (purple) reflect the perturbation HADD type, and the annotation box shows the impact and recovery durations." />
+<figcaption aria-hidden="true">Figure 3: The same habitat pair under a
+perturbation HADD (2-year full blockage, 3-year recovery). Compensation
+is calculated in service-years: the required area is the area needed to
+generate enough ecological service-years over the planning horizon to
+offset the temporary loss. The panel titles and bar colour (purple)
+reflect the perturbation HADD type, and the annotation box shows the
+impact and recovery durations.</figcaption>
+</figure>
 
 The three examples illustrate how HADD type fundamentally changes the
 required compensation area:
@@ -962,7 +962,7 @@ has only a 50% chance of fully compensating for the HADD.
 # Acknowledgements
 
 Alexandre-Bisonette Lafontaine and Annik Gagné walked me through the
-actual needs of the Fish Habitats Grou to try to make the tool useful
+actual needs of the Fish Habitats Group to try to make the tool useful
 for the analysts actually doing the work.
 
 [1] weights for decision making are not necessarily importance weights
